@@ -16,7 +16,7 @@ import {
   CardMedia,
   TextField,
   Paper,
-  Avatar
+  Avatar, Stack
 } from "@mui/material";
 // @ts-ignore
 import Grid from "@mui/material/Grid";
@@ -24,8 +24,13 @@ import Grid from "@mui/material/Grid";
 //import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
+import { useMediaQuery, useTheme } from "@mui/system";
 
 export default function App() {
+  const theme = useTheme();
+  const isLgUp = useMediaQuery(theme.breakpoints.up('lg'));
+  const opacityTarget = isLgUp ? 0.0 : 0.5;
+
   const listings = [
     {
       id: 1,
@@ -69,31 +74,43 @@ export default function App() {
   return (
     <Box sx={{ bgcolor: "#d8bed5ff", width: "100vw", minHeight: "100vh", alignItems: "center", justifyContent: "center", justifyItems: "center" }}>
       {/* NAVBAR */}
-      <AppBar sx={{ height: 85, bgcolor: '#897FA2' }} position="sticky" color="default" elevation={1}>
-        <Toolbar sx={{ height: 85, justifyContent: "space-between" }}>
-          <Box display="flex" alignItems="center" gap={2}>
-            <Avatar sx={{ height: 80, width: 80 }} src="/meu-portifolio/img/profile.jpg" />
-            <Box>
-              <Typography variant="h6" color="white">Mônica Souza — Corretora</Typography>
-              <Typography variant="body2" color="white">
-                CRECI AM 7646 • Imóvel na planta e venda residencial
-              </Typography>
+      <AppBar sx={{ bgcolor: '#897FA2' }} position="static" color="default" elevation={1}>
+        <Toolbar sx={{ height: { xs: "auto", md: 170 }, justifyContent: "space-between", alignItems: "center", py: { xs: 2, md: 0 } }}>
+
+          <Box sx={{ p: 1, m: 1, width: '100%' }} justifyContent="space-between" alignItems="center">
+            <Box display="flex" sx={{ pb: 2 }} alignItems="center" gap={2}>
+              <Avatar sx={{ height: 80, width: 80 }} src="/meu-portifolio/img/profile.jpg" />
+              <Box>
+                <Typography variant="h6" color="white">Mônica Souza — Corretora</Typography>
+                <Typography variant="body2" color="white">
+                  CRECI AM 7646 • Imóvel na planta e venda residencial
+                </Typography>
+              </Box>
             </Box>
+            <Stack
+              direction={{ xs: "column", md: "row" }}
+              spacing={1}
+              alignItems="right"
+              sx={{ width: { xs: "100%", md: "auto" } }}
+            >
+              <Box display="flex" gap={1} flexWrap="wrap" sx={{ width: '100%', justifyContent: 'right', justifyItems: 'right' }} justifyContent={{ xs: "center", md: "flex-end" }}>
+                <Button color="secondary" variant="contained" href="#servicos">Serviços</Button>
+                <Button color="secondary" variant="contained" href="#destaques">Destaques</Button>
+                <Button color="secondary" variant="contained" href="#depoimentos">Depoimentos</Button>
+                <Button color="secondary" variant="contained" href="#contato">Contato</Button>
+                <Button color="secondary" variant="contained" startIcon={<PhoneIcon />} href="tel:+5592986093554">
+                  (92) 98609-3554
+                </Button>
+                <Button startIcon={<EmailIcon />} variant="contained" color="primary" href="mailto:corretora.msouza@gmail.com">
+                  Mensagem
+                </Button>
+              </Box>
+            </Stack>
           </Box>
-          <Box display={{ xs: "none", md: "flex" }} gap={2}>
-            <Button color="secondary" variant="contained" href="#servicos">Serviços</Button>
-            <Button color="secondary" variant="contained" href="#destaques">Destaques</Button>
-            <Button color="secondary" variant="contained" href="#depoimentos">Depoimentos</Button>
-            <Button color="secondary" variant="contained" href="#contato">Contato</Button>
-          </Box>
-          <Box display={{ xs: "none", md: "flex" }} gap={1}>
-            <Button color="secondary" variant="contained" startIcon={<PhoneIcon />} href="tel:+5592986093554">
-              (92) 98609-3554
-            </Button>
-            <Button startIcon={<EmailIcon />} variant="contained" color="primary" href="mailto:corretora.msouza@gmail.com">
-              Mensagem
-            </Button>
-          </Box>
+
+
+          {/* Área de botões: empilha em coluna no xs/tablet e fica em linha no desktop */}
+
         </Toolbar>
       </AppBar>
 
@@ -101,13 +118,13 @@ export default function App() {
       <Box sx={{
         backgroundColor: "#504078", backgroundImage: `url('/meu-portifolio/img/imagem-cortada.png')`,
         backgroundSize: "auto 130%", backgroundRepeat: "no-repeat",
-        backgroundPosition: "right center", 
+        backgroundPosition: "right center",
         color: "white", py: 10, width: "100%"
       }}>
         <Container>
           <Box alignItems="center">
-            <Box width={{ xs: "100%", md: "70%"}} textAlign="left">
-              <Card sx={{ bgcolor: "rgba(78, 15, 75, 0.5)", color:'white', p: 1 }}>
+            <Box sx={{ ml: 1 }} width={{ xs: "100%", md: "70%" }} textAlign="left">
+              <Card sx={{ bgcolor: `rgba(78, 15, 75, ${opacityTarget})`, color: 'white', p: 1 }}>
                 <Typography variant="h4" fontWeight={700} gutterBottom>
                   Encontre seu próximo lar com quem entende do mercado de Manaus!
                 </Typography>
@@ -131,18 +148,17 @@ export default function App() {
       </Box >
 
       {/* SERVIÇOS */}
-      < Container id="servicos" sx={{ py: 8 }
-      }>
+      < Container id="servicos" sx={{ maxWidth: 1200, ml: 5, mr: 5, pt: 8, pb: 4 }}>
         <Typography variant="h4" gutterBottom>
           Serviços
         </Typography>
         <Typography variant="body1" color="text.secondary" gutterBottom>
           Consultoria completa: seleção de imóveis, visita, negociação e apoio no financiamento.
         </Typography>
-        <Grid container spacing={3} sx={{ mt: 2 }}>
+        <Grid container spacing={3} sx={{ mt: 2, justifyContent: "center", justifyItems: "center" }}>
           {["Venda & Compra", "Imóvel na planta", "Financiamento"].map((title, i) => (
-            <Grid key={i}>
-              <Paper elevation={2} sx={{ p: 3 }}>
+            <Grid key={i} sx={{ width: '100%', maxWidth: 350 }} >
+              <Paper elevation={2} sx={{ p: 3, width: '100%' }}>
                 <Typography variant="h6">{title}</Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                   {i === 0 && "Ajudo compradores e vendedores com as melhores condições."}
@@ -156,63 +172,72 @@ export default function App() {
       </Container >
 
       {/* DESTAQUES */}
-      < Box id="destaques" sx={{ bgcolor: "#fff", py: 8 }}>
-        <Container>
-          <Typography variant="h4" gutterBottom>
-            Destaques
-          </Typography>
-          <Grid container spacing={4}>
-            {listings.map((l) => (
-              <Grid key={l.id}>
-                <Card>
-                  <CardMedia component="img" height="180" image={l.img} alt={l.title} />
-                  <CardContent>
-                    <Typography variant="h6">{l.title}</Typography>
-                    <Typography color="primary" fontWeight={700}>{l.price}</Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Área: {l.area} • Terreno: {l.lot}
-                    </Typography>
-                    <Box mt={2} display="flex" gap={1}>
-                      <Button size="small" variant="outlined" href={`mailto:corretora.msouza@gmail.com?subject=Interesse%20no%20${encodeURIComponent(l.title)}`}>
-                        Mais informações
-                      </Button>
-                      <Button size="small" variant="contained" href="#contato">
-                        Agendar visita
-                      </Button>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Box >
+
+      <Container id="destaques" sx={{ maxWidth: 1200, pl: 5, pr: 5, pt: 8, pb: 4 }}>
+        <Typography variant="h4" gutterBottom>
+          Destaques
+        </Typography>
+        <Typography variant="body1" color="text.secondary" gutterBottom>
+          Confira as novidades e oportunidades que selecionei para você.
+        </Typography>
+        <Grid container spacing={3} sx={{ mt: 2, justifyContent: "center" }}>
+          {listings.map((l) => (
+            <Grid key={l.id} maxWidth={350} width='100%'>
+              <Card>
+                <CardMedia component="img" height="180" image={l.img} alt={l.title} />
+                <CardContent>
+                  <Typography variant="h6">{l.title}</Typography>
+                  <Typography color="primary" fontWeight={700}>{l.price}</Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Área: {l.area} • Terreno: {l.lot}
+                  </Typography>
+                  <Box mt={2} display="flex" gap={1}>
+                    <Button size="small" variant="outlined" href={`mailto:corretora.msouza@gmail.com?subject=Interesse%20no%20${encodeURIComponent(l.title)}`}>
+                      Mais informações
+                    </Button>
+                    <Button size="small" variant="contained" href="#contato">
+                      Agendar visita
+                    </Button>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+
 
       {/* DEPOIMENTOS */}
-      < Box id="depoimentos" sx={{ bgcolor: "#f3f3f9", py: 8 }}>
-        <Container>
+      
+        <Container id="depoimentos" sx={{ maxWidth: 1200, pl: 5, pr: 5, pt: 8, pb: 4 }}>
           <Typography variant="h4" gutterBottom>
             Depoimentos
           </Typography>
-          <Grid container spacing={3}>
-            {testimonials.map((t) => (
-              <Grid key={t.id}>
-                <Paper elevation={2} sx={{ p: 3 }}>
+          <Typography variant="body1" color="text.secondary" gutterBottom>
+          O que dizem os nossos clientes.
+        </Typography>
+          <Stack width={{ xs: "100%" }} textAlign="left" sx={{ mt: 2 }}>
+            {testimonials.map((t)=>(
+              <Box key={t.id} display="flex" sx={{justifyItems: 'center', justifyContent: 'center'}} alignItems="center" gap={2} mb={3}>
+                <Paper elevation={2} sx={{ p: 3, Width: '100%' }}>
                   <Typography variant="body1">“{t.text}”</Typography>
                   <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                     — {t.name}
                   </Typography>
                 </Paper>
-              </Grid>
-            ))}
-          </Grid>
+              </Box>
+          ))}
+          </Stack>
         </Container>
-      </Box >
+   
 
       {/* CONTATO */}
-      < Container id="contato" sx={{ py: 8 }}>
+      < Container  id="contato" sx={{ maxWidth: 1200, pl: 5, pr: 5, pt: 8, pb: 4 }}>
         <Typography variant="h4" gutterBottom>
           Contato
+        </Typography>
+        <Typography variant="body1" color="text.secondary" gutterBottom>
+          Não se acanhe, mesmo que seja para tirar dúvidas, entre em contato!
         </Typography>
         <Grid container spacing={4}>
           <Grid>
