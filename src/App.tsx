@@ -67,27 +67,27 @@ export default function App() {
   ];
 
   return (
-    <Box sx={{ bgcolor: "#f9f9f9", width: "100vw", minHeight: "100vh", alignItems:"center", justifyContent: "center", justifyItems: "center" }}>
+    <Box sx={{ bgcolor: "#d8bed5ff", width: "100vw", minHeight: "100vh", alignItems: "center", justifyContent: "center", justifyItems: "center" }}>
       {/* NAVBAR */}
-      <AppBar position="sticky" color="default" elevation={1}>
-        <Toolbar sx={{ justifyContent: "space-between" }}>
+      <AppBar sx={{ height: 85, bgcolor: '#897FA2' }} position="sticky" color="default" elevation={1}>
+        <Toolbar sx={{ height: 85, justifyContent: "space-between" }}>
           <Box display="flex" alignItems="center" gap={2}>
-            <Avatar src="https://via.placeholder.com/400x400?text=Foto" />
+            <Avatar sx={{ height: 80, width: 80 }} src="/meu-portifolio/img/profile.jpg" />
             <Box>
-              <Typography variant="h6">Mônica Souza — Corretora</Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="h6" color="white">Mônica Souza — Corretora</Typography>
+              <Typography variant="body2" color="white">
                 CRECI AM 7646 • Imóvel na planta e venda residencial
               </Typography>
             </Box>
           </Box>
           <Box display={{ xs: "none", md: "flex" }} gap={2}>
-            <Button href="#servicos">Serviços</Button>
-            <Button href="#destaques">Destaques</Button>
-            <Button href="#depoimentos">Depoimentos</Button>
-            <Button href="#contato">Contato</Button>
+            <Button color="secondary" variant="contained" href="#servicos">Serviços</Button>
+            <Button color="secondary" variant="contained" href="#destaques">Destaques</Button>
+            <Button color="secondary" variant="contained" href="#depoimentos">Depoimentos</Button>
+            <Button color="secondary" variant="contained" href="#contato">Contato</Button>
           </Box>
           <Box display={{ xs: "none", md: "flex" }} gap={1}>
-            <Button startIcon={<PhoneIcon />} variant="outlined" href="tel:+5592986093554">
+            <Button color="secondary" variant="contained" startIcon={<PhoneIcon />} href="tel:+5592986093554">
               (92) 98609-3554
             </Button>
             <Button startIcon={<EmailIcon />} variant="contained" color="primary" href="mailto:corretora.msouza@gmail.com">
@@ -98,40 +98,41 @@ export default function App() {
       </AppBar>
 
       {/* HERO */}
-      <Box sx={{ bgcolor: "primary.main", color: "white", py: 10 }}>
+      <Box sx={{
+        backgroundColor: "#504078", backgroundImage: `url('/meu-portifolio/img/imagem-cortada.png')`,
+        backgroundSize: "auto 130%", backgroundRepeat: "no-repeat",
+        backgroundPosition: "right center", 
+        color: "white", py: 10, width: "100%"
+      }}>
         <Container>
-          <Grid container spacing={4} alignItems="center">
-            <Grid>
-              <Typography variant="h3" fontWeight={700} gutterBottom>
-                Encontre seu próximo lar com quem entende do mercado de Manaus
-              </Typography>
-              <Typography variant="h6" sx={{ opacity: 0.9 }} gutterBottom>
-                Sou Mônica Souza — corretora especializada em imóveis na planta, financiamento pela Caixa e atendimento personalizado para famílias e investidores.
-              </Typography>
-              <Box sx={{ mt: 3, display: "flex", gap: 2 }}>
-                <Button variant="contained" color="secondary" href="#destaques">
-                  Ver Imóveis
-                </Button>
-                <Button variant="outlined" color="inherit" href="mailto:corretora.msouza@gmail.com">
-                  Quero ser contatado
-                </Button>
-              </Box>
-            </Grid>
-            <Box>
-              <Paper elevation={4}>
-                <img
-                  src="https://via.placeholder.com/900x700?text=Foto+Principal"
-                  alt="Hero"
-                  style={{ width: "100%", borderRadius: 8 }}
-                />
-              </Paper>
+          <Box alignItems="center">
+            <Box width={{ xs: "100%", md: "70%"}} textAlign="left">
+              <Card sx={{ bgcolor: "rgba(78, 15, 75, 0.5)", color:'white', p: 1 }}>
+                <Typography variant="h4" fontWeight={700} gutterBottom>
+                  Encontre seu próximo lar com quem entende do mercado de Manaus!
+                </Typography>
+                <Typography variant="h6" sx={{ opacity: 0.9 }} gutterBottom>
+                  Sou Mônica de Souza — corretora especializada em imóveis na planta, financiamento pela Caixa Economica Federal. Atendimento personalizado para famílias e investidores.
+                </Typography>
+                <Box sx={{ mt: 3, display: "flex", gap: 2 }}>
+                  <Button variant="contained" color="secondary" href="#destaques">
+                    Ver imóveis
+                  </Button>
+                  <Button variant="outlined" color="inherit" href="mailto:corretora.msouza@gmail.com">
+                    Entrar em contato por email
+                  </Button>
+
+                </Box>
+              </Card>
             </Box>
-          </Grid>
+
+          </Box>
         </Container>
-      </Box>
+      </Box >
 
       {/* SERVIÇOS */}
-      <Container id="servicos" sx={{ py: 8 }}>
+      < Container id="servicos" sx={{ py: 8 }
+      }>
         <Typography variant="h4" gutterBottom>
           Serviços
         </Typography>
@@ -152,10 +153,10 @@ export default function App() {
             </Grid>
           ))}
         </Grid>
-      </Container>
+      </Container >
 
       {/* DESTAQUES */}
-      <Box id="destaques" sx={{ bgcolor: "#fff", py: 8 }}>
+      < Box id="destaques" sx={{ bgcolor: "#fff", py: 8 }}>
         <Container>
           <Typography variant="h4" gutterBottom>
             Destaques
@@ -185,10 +186,10 @@ export default function App() {
             ))}
           </Grid>
         </Container>
-      </Box>
+      </Box >
 
       {/* DEPOIMENTOS */}
-      <Box id="depoimentos" sx={{ bgcolor: "#f3f3f9", py: 8 }}>
+      < Box id="depoimentos" sx={{ bgcolor: "#f3f3f9", py: 8 }}>
         <Container>
           <Typography variant="h4" gutterBottom>
             Depoimentos
@@ -206,10 +207,10 @@ export default function App() {
             ))}
           </Grid>
         </Container>
-      </Box>
+      </Box >
 
       {/* CONTATO */}
-      <Container id="contato" sx={{ py: 8 }}>
+      < Container id="contato" sx={{ py: 8 }}>
         <Typography variant="h4" gutterBottom>
           Contato
         </Typography>
@@ -256,12 +257,12 @@ export default function App() {
             </Paper>
           </Grid>
         </Grid>
-      </Container>
+      </Container >
 
       {/* FOOTER */}
-      <Box sx={{ bgcolor: "#111", width: "100%", color: "#aaa", py: 4, textAlign: "center" }}>
+      < Box sx={{ bgcolor: "#111", width: "100%", color: "#aaa", py: 4, textAlign: "center" }}>
         <Typography variant="body2">© {new Date().getFullYear()} Mônica Souza — Corretora. Todos os direitos reservados.</Typography>
-      </Box>
-    </Box>
+      </Box >
+    </Box >
   );
 }
