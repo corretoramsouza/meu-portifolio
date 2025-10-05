@@ -130,13 +130,13 @@ export default function AutoPlayVideo({ src, poster, height = "auto", sx }: Prop
           {mutedState ? (
             <Tooltip title="Ativar som">
               <IconButton color="primary" onClick={enableSound} size="large">
-                <VolumeUpIcon />
+                <VolumeOffIcon />
               </IconButton>
             </Tooltip>
           ) : (
             <Tooltip title="Desativar som">
               <IconButton color="primary" onClick={disableSound} size="large">
-                <VolumeOffIcon />
+                <VolumeUpIcon />
               </IconButton>
             </Tooltip>
           )}
