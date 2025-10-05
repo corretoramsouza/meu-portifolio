@@ -136,7 +136,7 @@ export default function App() {
               <Box>
                 <Typography variant="h6" color="white">Mônica Souza — Corretora</Typography>
                 <Typography variant="body2" color="white">
-                  CRECI AM 7646 • Imóvel na planta e venda residencial
+                  CRECI AM 7646 • Imóvel na planta e venda residencial.
                 </Typography>
               </Box>
             </Box>
