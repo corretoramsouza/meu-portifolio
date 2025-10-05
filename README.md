@@ -1,6 +1,17 @@
 # meu-portifolio
 Portifólio contendo informações profissionais e de imóveis anunciados
 
+## Comandos para executar o projeto localmente
+
+1. Executar o projeto local
+`npm run dev`
+
+2. Compilar o projeto sem rodar
+`npm run build`
+
+3. Fazer o deploy, ou seja, subir meu site pro github pages, dessa forma consigo acessar pelo https://corretoramsouza.github.io/meu-portifolio 
+`npm run deploy`
+
 ## Comandos para meu site
 
 - Ver o que falta subir no github: `git status`
