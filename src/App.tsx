@@ -201,31 +201,58 @@ export default function App() {
         {/* Vídeo que toca automaticamente quando a seção fica em foco.
             Coloque o arquivo .mp4 em public/meu-portifolio/media/ e ajuste o src abaixo. */}
         <AutoPlayVideo src="/meu-portifolio/media/destaque-video.mp4" poster="/meu-portifolio/img/servico-2.jpeg"/>
+        
         <Grid container spacing={3} sx={{ mt: 2, justifyContent: "center" }}>
           {listings.map((l) => (
             <Grid key={l.id} maxWidth={350} width='100%'>
-              <Card sx={{  display: 'flex', flexDirection: 'column', justifyContent: 'end'}}>
-                <CardMedia component="img" height={350} image={l.img} alt={l.title} />
+              <Card
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'end',
+                  overflow: 'hidden', // garante que o zoom não quebre o layout
+                  borderRadius: 2,
+                  // ao passar o mouse no card, aplica transform na imagem com classe .card-image
+                  '&:hover .card-image': {
+                    transform: 'scale(1.06)',
+                  },
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  height={350}
+                  image={l.img}
+                  alt={l.title}
+                  className="card-image"
+                  sx={{
+                    transition: 'transform 500ms ease',
+                    willChange: 'transform',
+                    display: 'block',
+                    objectFit: 'cover',
+                  }}
+                />
                 
-                <CardContent sx={{ color: 'white', bgcolor: 'rgba(78, 15, 75, 0.8)', alignContent: 'end', height: 200 }}>
-                  <Typography variant="h6">{l.title}</Typography>
-                  <Typography color="white" fontWeight={700}>{l.price}</Typography>
-                  <Typography variant="body2" color="white">
-                    Área: {l.area} • Terreno: {l.lot}
-                  </Typography>
-                  <Box mt={2} display="flex" gap={1}>
-                    <Button variant="outlined" color="inherit" size="small" href={`mailto:corretora.msouza@gmail.com?subject=Interesse%20no%20${encodeURIComponent(l.title)}`}>
-                      Mais informações
-                    </Button>
-                    <Button variant="outlined" color="inherit" size="small" href="#contato">
-                      Agendar visita
-                    </Button>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+                 <CardContent sx={{ color: 'white', bgcolor: 'rgba(78, 15, 75, 0.8)', alignContent: 'end', height: 200 }}>
+                   <Typography variant="h6">{l.title}</Typography>
+                   <Typography color="white" fontWeight={700}>{l.price}</Typography>
+                   <Typography variant="body2" color="white">
+                     Área: {l.area} • Terreno: {l.lot}
+                   </Typography>
+                   <Box mt={2} display="flex" gap={1}>
+                     <Button variant="outlined" color="inherit" size="small" href={`mailto:corretora.msouza@gmail.com?subject=Interesse%20no%20${encodeURIComponent(l.title)}`}>
+                       Mais informações
+                     </Button>
+                     <Button variant="outlined" color="inherit" size="small" href="#contato">
+                       Agendar visita
+                     </Button>
+                   </Box>
+                 </CardContent>
+               </Card>
+             </Grid>
+           ))}
+         </Grid>
+
+         <AutoPlayVideo src="/meu-portifolio/media/destaque-video-2.mp4" poster="/meu-portifolio/img/servico-2.jpeg"/>
       </Container>
 
 

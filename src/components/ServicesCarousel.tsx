@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Box,
   Card,
@@ -51,7 +51,7 @@ export default function ServicesCarousel({ listings }: { listings: Listing[] }) 
   }, [listings.length, paused]);
 
   const go = (index: number) => {
-    setActive((prev) => {
+    setActive(() => {
       const next = (index + listings.length) % listings.length;
       return next;
     });
