@@ -17,7 +17,7 @@ import {
   TextField,
   Paper,
   Avatar, Stack
- } from "@mui/material";
+} from "@mui/material";
 import ServicesCarousel from "./components/ServicesCarousel";
 // @ts-ignore
 import Grid from "@mui/material/Grid";
@@ -35,27 +35,27 @@ export default function App() {
 
   const listServices = [
     {
-      id: 1, 
-      title: "Consultoria Imobiliária", 
-      description: "Seleção personalizada de imóveis conforme suas necessidades.", 
+      id: 1,
+      title: "Consultoria Imobiliária",
+      description: "Seleção personalizada de imóveis conforme suas necessidades.",
       img: '/meu-portifolio/img/servico-1.jpeg'
     },
     {
-      id: 2, 
-      title: "Venda & Compra", 
-      description: "Ajudo compradores e vendedores com as melhores condições.", 
+      id: 2,
+      title: "Venda & Compra",
+      description: "Ajudo compradores e vendedores com as melhores condições.",
       img: '/meu-portifolio/img/servico-2.jpeg'
     },
     {
-      id: 3, 
-      title: "Imóvel na planta", 
-      description: "Especialista em lançamentos — da planta à entrega.", 
+      id: 3,
+      title: "Imóvel na planta",
+      description: "Especialista em lançamentos — da planta à entrega.",
       img: '/meu-portifolio/img/servico-3.jpeg'
     },
     {
-      id: 4, 
-      title: "Financiamento", 
-      description: "Auxílio completo com bancos e documentação..", 
+      id: 4,
+      title: "Financiamento",
+      description: "Auxílio completo com bancos e documentação..",
       img: '/meu-portifolio/img/servico-4.jpeg'
     },
   ]
@@ -123,8 +123,8 @@ export default function App() {
               sx={{ width: { xs: "100%", md: "auto" } }}
             >
               <Box display="flex" gap={1} flexWrap="wrap" sx={{ width: '100%', justifyContent: 'right', justifyItems: 'right' }} justifyContent={{ xs: "center", md: "flex-end" }}>
-                <Button color="secondary" variant="contained" href="#servicos">Serviços</Button>
                 <Button color="secondary" variant="contained" href="#destaques">Destaques</Button>
+                <Button color="secondary" variant="contained" href="#servicos">Serviços</Button>
                 <Button color="secondary" variant="contained" href="#depoimentos">Depoimentos</Button>
                 <Button color="secondary" variant="contained" href="#contato">Contato</Button>
                 <Button color="secondary" variant="contained" startIcon={<PhoneIcon />} href="tel:+5592986093554">
@@ -176,19 +176,6 @@ export default function App() {
         </Container>
       </Box >
 
-      {/* SERVIÇOS */}
-      <Container id="servicos" sx={{ maxWidth: 1200, ml: 5, mr: 5, pt: 8, pb: 4 }}>
-        <Typography variant="h4" gutterBottom>
-          Serviços
-        </Typography>
-        <Typography variant="body1" color="text.secondary" gutterBottom>
-          Consultoria completa: seleção de imóveis, visita, negociação e apoio no financiamento.
-        </Typography>
-
-        {/* Carousel component */}
-        <ServicesCarousel listings={listServices} />
-      </Container >
-
       {/* DESTAQUES */}
 
       <Container id="destaques" sx={{ maxWidth: 1200, pl: 5, pr: 5, pt: 8, pb: 4 }}>
@@ -198,10 +185,15 @@ export default function App() {
         <Typography variant="body1" color="text.secondary" gutterBottom>
           Confira as novidades e oportunidades que selecionei para você.
         </Typography>
-        {/* Vídeo que toca automaticamente quando a seção fica em foco.
-            Coloque o arquivo .mp4 em public/meu-portifolio/media/ e ajuste o src abaixo. */}
-        <AutoPlayVideo src="/meu-portifolio/media/destaque-video.mp4" poster="/meu-portifolio/img/servico-2.jpeg"/>
-        
+
+        <Box textAlign="center" sx={{ width: '100%', mt: 4 }}>
+          <Typography variant="h5" color="text.secondary" sx={{ mt: 2 }}>
+            Aqui você encontra lazer completo, segurança e tranquilidade para você e sua família !
+          </Typography>
+
+          <AutoPlayVideo src="/meu-portifolio/media/destaque-video-2.mp4" poster="/meu-portifolio/img/servico-2.jpeg" />
+
+        </Box>
         <Grid container spacing={3} sx={{ mt: 2, justifyContent: "center" }}>
           {listings.map((l) => (
             <Grid key={l.id} maxWidth={350} width='100%'>
@@ -231,57 +223,81 @@ export default function App() {
                     objectFit: 'cover',
                   }}
                 />
-                
-                 <CardContent sx={{ color: 'white', bgcolor: 'rgba(78, 15, 75, 0.8)', alignContent: 'end', height: 200 }}>
-                   <Typography variant="h6">{l.title}</Typography>
-                   <Typography color="white" fontWeight={700}>{l.price}</Typography>
-                   <Typography variant="body2" color="white">
-                     Área: {l.area} • Terreno: {l.lot}
-                   </Typography>
-                   <Box mt={2} display="flex" gap={1}>
-                     <Button variant="outlined" color="inherit" size="small" href={`mailto:corretora.msouza@gmail.com?subject=Interesse%20no%20${encodeURIComponent(l.title)}`}>
-                       Mais informações
-                     </Button>
-                     <Button variant="outlined" color="inherit" size="small" href="#contato">
-                       Agendar visita
-                     </Button>
-                   </Box>
-                 </CardContent>
-               </Card>
-             </Grid>
-           ))}
-         </Grid>
 
-         <AutoPlayVideo src="/meu-portifolio/media/destaque-video-2.mp4" poster="/meu-portifolio/img/servico-2.jpeg"/>
+                <CardContent sx={{ color: 'white', bgcolor: 'rgba(78, 15, 75, 0.8)', alignContent: 'end', height: 200 }}>
+                  <Typography variant="h6">{l.title}</Typography>
+                  <Typography color="white" fontWeight={700}>{l.price}</Typography>
+                  <Typography variant="body2" color="white">
+                    Área: {l.area} • Terreno: {l.lot}
+                  </Typography>
+                  <Box mt={2} display="flex" gap={1}>
+                    <Button variant="outlined" color="inherit" size="small" href={`mailto:corretora.msouza@gmail.com?subject=Interesse%20no%20${encodeURIComponent(l.title)}`}>
+                      Mais informações
+                    </Button>
+                    <Button variant="outlined" color="inherit" size="small" href="#contato">
+                      Agendar visita
+                    </Button>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+
+        <Box textAlign="center" sx={{ width: '100%', mt: 4 }}>
+          <Typography variant="h5" color="text.secondary" sx={{ mt: 2 }}>
+            Conquiste este sonho pelo programa Minha Casa Minha Vida !
+          </Typography>
+
+          <AutoPlayVideo src="/meu-portifolio/media/destaque-video.mp4" poster="/meu-portifolio/img/servico-2.jpeg" />
+
+        </Box>
+        {/* Vídeo que toca automaticamente quando a seção fica em foco.
+            Coloque o arquivo .mp4 em public/meu-portifolio/media/ e ajuste o src abaixo. */}
+
+
       </Container>
+
+       {/* SERVIÇOS */}
+      <Container id="servicos" sx={{ maxWidth: 1200, ml: 5, mr: 5, pt: 8, pb: 4 }}>
+        <Typography variant="h4" gutterBottom>
+          Serviços
+        </Typography>
+        <Typography variant="body1" color="text.secondary" gutterBottom>
+          Consultoria completa: seleção de imóveis, visita, negociação e apoio no financiamento.
+        </Typography>
+
+        {/* Carousel component */}
+        <ServicesCarousel listings={listServices} />
+      </Container >
 
 
       {/* DEPOIMENTOS */}
-      
-        <Container id="depoimentos" sx={{ maxWidth: 1200, pl: 5, pr: 5, pt: 8, pb: 4 }}>
-          <Typography variant="h4" gutterBottom>
-            Depoimentos
-          </Typography>
-          <Typography variant="body1" color="text.secondary" gutterBottom>
+
+      <Container id="depoimentos" sx={{ maxWidth: 1200, pl: 5, pr: 5, pt: 8, pb: 4 }}>
+        <Typography variant="h4" gutterBottom>
+          Depoimentos
+        </Typography>
+        <Typography variant="body1" color="text.secondary" gutterBottom>
           O que dizem os nossos clientes.
         </Typography>
-          <Stack width={{ xs: "100%" }} textAlign="left" sx={{ mt: 2 }}>
-            {testimonials.map((t)=>(
-              <Box key={t.id} display="flex" sx={{justifyItems: 'center', justifyContent: 'center'}} alignItems="center" gap={2} mb={3}>
-                <Paper elevation={2} sx={{ p: 3, Width: '100%' }}>
-                  <Typography variant="body1">“{t.text}”</Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                    — {t.name}
-                  </Typography>
-                </Paper>
-              </Box>
+        <Stack width={{ xs: "100%" }} textAlign="left" sx={{ mt: 2 }}>
+          {testimonials.map((t) => (
+            <Box key={t.id} display="flex" sx={{ justifyItems: 'center', justifyContent: 'center' }} alignItems="center" gap={2} mb={3}>
+              <Paper elevation={2} sx={{ p: 3, Width: '100%' }}>
+                <Typography variant="body1">“{t.text}”</Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                  — {t.name}
+                </Typography>
+              </Paper>
+            </Box>
           ))}
-          </Stack>
-        </Container>
-   
+        </Stack>
+      </Container>
+
 
       {/* CONTATO */}
-      < Container  id="contato" sx={{ maxWidth: 1200, pl: 5, pr: 5, pt: 8, pb: 4 }}>
+      < Container id="contato" sx={{ maxWidth: 1200, pl: 5, pr: 5, pt: 8, pb: 4 }}>
         <Typography variant="h4" gutterBottom>
           Contato
         </Typography>
