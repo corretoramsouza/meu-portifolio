@@ -24,6 +24,7 @@ import Grid from "@mui/material/Grid";
 import AutoPlayVideo from "./components/AutoPlayVideo";
 import BookDialog from "./components/BookDialog";
 import { useState } from "react";
+import ListingGrid from "./components/ListingGrid";
 
 //import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -63,6 +64,39 @@ export default function App() {
   ]
 
   const listings = [
+    {
+      id: 1,
+      title: "Horizonte - Ponta Negra",
+      subtitle: "Apartamentos de 2 e 3 quartos.",
+      price: "R$ 488.169,00",
+      area: "63,75 e 77,34 m²",
+      lot: "17.883,37 m²",
+      img: "/meu-portifolio/img/Destaque-1.jpeg",
+      book: "https://drive.google.com/file/d/1Qiy7be8wVwfFlCu5IWh9XUYbUvnMoT_7/preview", // coloque o PDF correspondente em public/meu-portifolio/books/
+    },
+    {
+      id: 2,
+      title: "Tower Mosaico - Planalto",
+      subtitle: "Apartamento de 2 quartos.",
+      price: "R$ 297.400,00",
+      area: "46,60 m²",
+      lot: "11.129,49 m²",
+      img: "/meu-portifolio/img/Destaque-2.jpeg",
+      book: "https://drive.google.com/file/d/1Ttns9TI9IxL9EHWFZJuxQOu4cAJrdFKE/preview",
+    },
+    {
+      id: 3,
+      title: "Realize Mosaico - Planalto",
+      subtitle: "Apartamentos de 2 e 3 quartos.",
+      price: "R$ 219.600,00",
+      area: "40,60 e 48,43 m²",
+      lot: "22.356,31 m²",
+      img: "/meu-portifolio/img/Destaque-3.jpeg",
+      book: "https://drive.google.com/file/d/17G-6gBItGXpmOYuMiKBPMYMM_rkVTH8U/preview",
+    },
+  ];
+
+  const listProducts = [
     {
       id: 1,
       title: "Horizonte - Ponta Negra",
@@ -217,61 +251,7 @@ export default function App() {
           <AutoPlayVideo src="/meu-portifolio/media/destaque-video-2.mp4" poster="/meu-portifolio/img/servico-2.jpeg" />
         </Box>
         
-        <Grid container spacing={3} sx={{ mt: 2, justifyContent: "center" }}>
-          {listings.map((l) => (
-            <Grid key={l.id} maxWidth={350} width='100%'>
-              <Card
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'end',
-                  overflow: 'hidden', // garante que o zoom não quebre o layout
-                  borderRadius: 2,
-                  // ao passar o mouse no card, aplica transform na imagem com classe .card-image
-                  '&:hover .card-image': {
-                    transform: 'scale(1.06)',
-                  },
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  height={350}
-                  image={l.img}
-                  alt={l.title}
-                  className="card-image"
-                  sx={{
-                    transition: 'transform 500ms ease',
-                    willChange: 'transform',
-                    display: 'block',
-                    objectFit: 'cover',
-                  }}
-                />
-
-                <CardContent sx={{ color: 'white', bgcolor: 'rgba(78, 15, 75, 0.8)', alignContent: 'end', height: 200 }}>
-                  <Typography variant="h5">{l.title}</Typography>
-                  <Typography variant="body1"><strong>{l.subtitle}</strong></Typography>
-                  <Typography color="#e895f7ff" fontWeight={700}>{l.price}</Typography>
-                  <Typography variant="body2" color="white">
-                    Área: {l.area} • Terreno: {l.lot}
-                  </Typography>
-                  <Box mt={2} display="flex" gap={1}>
-                    <Button
-                      variant="outlined"
-                      color="inherit"
-                      size="small"
-                      onClick={() => handleOpenBook(l.book, l.title)}
-                    >
-                      Mais informações
-                    </Button>
-                    <Button variant="outlined" color="inherit" size="small" href="#contato">
-                      Agendar visita
-                    </Button>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+        <ListingGrid listings={listings} onOpenBook={handleOpenBook} />
 
         <Box textAlign="center" sx={{ width: '100%', mt: 4 }}>
           <Typography variant="h5" color="text.secondary" sx={{ mt: 2 }}>
@@ -286,6 +266,20 @@ export default function App() {
 
 
       </Container>
+
+      
+       {/* Produtos */}
+      <Container id="produtos" sx={{ maxWidth: 1200, ml: 5, mr: 5, pt: 8, pb: 4 }}>
+        <Typography variant="h4" gutterBottom>
+          Produtos
+        </Typography>
+        <Typography variant="body1" color="text.secondary" gutterBottom>
+          Conheça nosso catálogo de imóveis.
+        </Typography>
+
+        {/* Lista de produto vertical */}
+        <ListingGrid listings={listProducts} onOpenBook={handleOpenBook} />
+      </Container >
 
        {/* SERVIÇOS */}
       <Container id="servicos" sx={{ maxWidth: 1200, ml: 5, mr: 5, pt: 8, pb: 4 }}>
