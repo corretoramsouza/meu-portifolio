@@ -17,9 +17,11 @@ import {
   TextField,
   Paper,
   Avatar, Stack
-} from "@mui/material";
+ } from "@mui/material";
+import ServicesCarousel from "./components/ServicesCarousel";
 // @ts-ignore
 import Grid from "@mui/material/Grid";
+import AutoPlayVideo from "./components/AutoPlayVideo";
 
 //import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -31,6 +33,33 @@ export default function App() {
   const isLgUp = useMediaQuery(theme.breakpoints.up('lg'));
   const opacityTarget = isLgUp ? 0.0 : 0.5;
 
+  const listServices = [
+    {
+      id: 1, 
+      title: "Consultoria Imobiliária", 
+      description: "Seleção personalizada de imóveis conforme suas necessidades.", 
+      img: '/meu-portifolio/img/servico-1.jpeg'
+    },
+    {
+      id: 2, 
+      title: "Venda & Compra", 
+      description: "Ajudo compradores e vendedores com as melhores condições.", 
+      img: '/meu-portifolio/img/servico-2.jpeg'
+    },
+    {
+      id: 3, 
+      title: "Imóvel na planta", 
+      description: "Especialista em lançamentos — da planta à entrega.", 
+      img: '/meu-portifolio/img/servico-3.jpeg'
+    },
+    {
+      id: 4, 
+      title: "Financiamento", 
+      description: "Auxílio completo com bancos e documentação..", 
+      img: '/meu-portifolio/img/servico-4.jpeg'
+    },
+  ]
+
   const listings = [
     {
       id: 1,
@@ -38,7 +67,7 @@ export default function App() {
       price: "R$ 480.000",
       area: "71 m²",
       lot: "9x25",
-      img: "https://via.placeholder.com/800x600?text=Imovel+1",
+      img: "/meu-portifolio/img/Destaque-1.jpeg",
     },
     {
       id: 2,
@@ -46,7 +75,7 @@ export default function App() {
       price: "R$ 650.000",
       area: "120 m²",
       lot: "10x30",
-      img: "https://via.placeholder.com/800x600?text=Imovel+2",
+      img: "/meu-portifolio/img/Destaque-2.jpeg",
     },
     {
       id: 3,
@@ -54,7 +83,7 @@ export default function App() {
       price: "R$ 320.000",
       area: "38 m²",
       lot: "—",
-      img: "https://via.placeholder.com/800x600?text=Imovel+3",
+      img: "/meu-portifolio/img/Destaque-3.jpeg",
     },
   ];
 
@@ -148,27 +177,16 @@ export default function App() {
       </Box >
 
       {/* SERVIÇOS */}
-      < Container id="servicos" sx={{ maxWidth: 1200, ml: 5, mr: 5, pt: 8, pb: 4 }}>
+      <Container id="servicos" sx={{ maxWidth: 1200, ml: 5, mr: 5, pt: 8, pb: 4 }}>
         <Typography variant="h4" gutterBottom>
           Serviços
         </Typography>
         <Typography variant="body1" color="text.secondary" gutterBottom>
           Consultoria completa: seleção de imóveis, visita, negociação e apoio no financiamento.
         </Typography>
-        <Grid container spacing={3} sx={{ mt: 2, justifyContent: "center", justifyItems: "center" }}>
-          {["Venda & Compra", "Imóvel na planta", "Financiamento"].map((title, i) => (
-            <Grid key={i} sx={{ width: '100%', maxWidth: 350 }} >
-              <Paper elevation={2} sx={{ p: 3, width: '100%' }}>
-                <Typography variant="h6">{title}</Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                  {i === 0 && "Ajudo compradores e vendedores com as melhores condições."}
-                  {i === 1 && "Especialista em lançamentos — da planta à entrega."}
-                  {i === 2 && "Auxílio completo com bancos e documentação."}
-                </Typography>
-              </Paper>
-            </Grid>
-          ))}
-        </Grid>
+
+        {/* Carousel component */}
+        <ServicesCarousel listings={listServices} />
       </Container >
 
       {/* DESTAQUES */}
@@ -180,22 +198,26 @@ export default function App() {
         <Typography variant="body1" color="text.secondary" gutterBottom>
           Confira as novidades e oportunidades que selecionei para você.
         </Typography>
+        {/* Vídeo que toca automaticamente quando a seção fica em foco.
+            Coloque o arquivo .mp4 em public/meu-portifolio/media/ e ajuste o src abaixo. */}
+        <AutoPlayVideo src="/meu-portifolio/media/destaque-video.mp4" poster="/meu-portifolio/img/Destaque-1.jpeg" height={360} />
         <Grid container spacing={3} sx={{ mt: 2, justifyContent: "center" }}>
           {listings.map((l) => (
             <Grid key={l.id} maxWidth={350} width='100%'>
-              <Card>
-                <CardMedia component="img" height="180" image={l.img} alt={l.title} />
-                <CardContent>
+              <Card sx={{  display: 'flex', flexDirection: 'column', justifyContent: 'end'}}>
+                <CardMedia component="img" height={350} image={l.img} alt={l.title} />
+                
+                <CardContent sx={{ color: 'white', bgcolor: 'rgba(78, 15, 75, 0.8)', alignContent: 'end', height: 200 }}>
                   <Typography variant="h6">{l.title}</Typography>
-                  <Typography color="primary" fontWeight={700}>{l.price}</Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography color="white" fontWeight={700}>{l.price}</Typography>
+                  <Typography variant="body2" color="white">
                     Área: {l.area} • Terreno: {l.lot}
                   </Typography>
                   <Box mt={2} display="flex" gap={1}>
-                    <Button size="small" variant="outlined" href={`mailto:corretora.msouza@gmail.com?subject=Interesse%20no%20${encodeURIComponent(l.title)}`}>
+                    <Button variant="outlined" color="inherit" size="small" href={`mailto:corretora.msouza@gmail.com?subject=Interesse%20no%20${encodeURIComponent(l.title)}`}>
                       Mais informações
                     </Button>
-                    <Button size="small" variant="contained" href="#contato">
+                    <Button variant="outlined" color="inherit" size="small" href="#contato">
                       Agendar visita
                     </Button>
                   </Box>
