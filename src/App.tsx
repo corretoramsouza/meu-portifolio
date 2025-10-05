@@ -91,7 +91,7 @@ export default function App() {
       area: "40,60 e 48,43 m²",
       lot: "22.356,31 m²",
       img: "/meu-portifolio/img/Destaque-3.jpeg",
-      book: "https://drive.google.com/file/d/1sHE2Xx2gYkCqFxsXE29ADhl_uIr5tDtO/preview",
+      book: "https://drive.google.com/file/d/17G-6gBItGXpmOYuMiKBPMYMM_rkVTH8U/preview",
     },
   ];
 
