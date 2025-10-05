@@ -200,7 +200,7 @@ export default function App() {
         </Typography>
         {/* Vídeo que toca automaticamente quando a seção fica em foco.
             Coloque o arquivo .mp4 em public/meu-portifolio/media/ e ajuste o src abaixo. */}
-        <AutoPlayVideo src="/meu-portifolio/media/destaque-video.mp4" poster="/meu-portifolio/img/Destaque-1.jpeg" height={360} />
+        <AutoPlayVideo src="/meu-portifolio/media/destaque-video.mp4" poster="/meu-portifolio/img/servico-2.jpeg"/>
         <Grid container spacing={3} sx={{ mt: 2, justifyContent: "center" }}>
           {listings.map((l) => (
             <Grid key={l.id} maxWidth={350} width='100%'>

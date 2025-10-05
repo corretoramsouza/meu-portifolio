@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Card, CardMedia, CardContent, Typography, Button, Stack } from "@mui/material";
+import { Box, Card, CardMedia, CardContent, Typography, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/system";
 

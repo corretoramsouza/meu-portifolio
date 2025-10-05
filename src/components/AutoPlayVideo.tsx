@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Box } from "@mui/material";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   sx?: any;
 };
 
-export default function AutoPlayVideo({ src, poster, height = 360, sx }: Props) {
+export default function AutoPlayVideo({ src, poster, sx }: Props) {
   const ref = useRef<HTMLVideoElement | null>(null);
   const [userInteracted, setUserInteracted] = useState(false);
 
@@ -31,12 +31,10 @@ export default function AutoPlayVideo({ src, poster, height = 360, sx }: Props) 
     // garante que o vídeo seja visível mesmo se oz estilos do pai mudarem
     el.style.display = "block";
     el.style.width = "100%";
-    el.style.maxWidth = "1000px";
     el.style.objectFit = "cover";
     el.style.borderRadius = "8px";
     // height em px quando numeric
-    if (typeof height === "number") el.style.height = `${height}px`;
-    else if (typeof height === "string") el.style.height = height;
+    el.style.height = `auto`;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -78,10 +76,10 @@ export default function AutoPlayVideo({ src, poster, height = 360, sx }: Props) 
     return () => {
       observer.disconnect();
     };
-  }, [userInteracted, height]);
+  }, [userInteracted]);
 
   return (
-    <Box sx={{ width: "100%", display: "flex", justifyContent: "center", my: 4, ...sx }}>
+    <Box sx={{ width: "100%", height:'auto', display: "flex", justifyContent: "center", my: 4, ...sx }}>
       <video
         ref={ref}
         src={src}
@@ -91,12 +89,11 @@ export default function AutoPlayVideo({ src, poster, height = 360, sx }: Props) 
         // controls intencionalmente omitidos
         style={{
           display: "block",
-          width: "100%",
-          maxWidth: 1000,
           objectFit: "cover",
+          width: "100%",
           borderRadius: 8,
           // usa px quando for número
-          height: typeof height === "number" ? `${height}px` : height,
+          height: 'auto',
         }}
       />
     </Box>
