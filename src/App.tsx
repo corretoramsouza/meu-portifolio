@@ -12,8 +12,6 @@ import {
   Container,
   Box,
   Card,
-  CardContent,
-  CardMedia,
   TextField,
   Paper,
   Avatar, Stack
@@ -53,7 +51,7 @@ export default function App() {
       id: 3,
       title: "Imóvel na planta",
       description: "Especialista em lançamentos — da planta à entrega.",
-      img: '/meu-portifolio/img/servico-3.jpeg'
+      img: '/meu-portifolio/img/implemetacao_planta.jpg'
     },
     {
       id: 4,
@@ -99,33 +97,64 @@ export default function App() {
   const listProducts = [
     {
       id: 1,
-      title: "Horizonte - Ponta Negra",
-      subtitle: "Apartamentos de 2 e 3 quartos.",
-      price: "R$ 488.169,00",
-      area: "63,75 e 77,34 m²",
-      lot: "17.883,37 m²",
-      img: "/meu-portifolio/img/Destaque-1.jpeg",
-      book: "https://drive.google.com/file/d/1Qiy7be8wVwfFlCu5IWh9XUYbUvnMoT_7/preview", // coloque o PDF correspondente em public/meu-portifolio/books/
+      title: "Sensia La Vie - Chapada",
+      subtitle: "Apartamentos de 1 e 2 quartos.",
+      price: "R$ 386.200,00",
+      area: "41,91 e 59,43 m²",
+      lot: "13.711,39 m²",
+      img: "/meu-portifolio/img/sensiaprodutos.jpg",
+      book: "https://drive.google.com/file/d/1GJW9E2SQtJaaMT5sv7EZ6hgQK7eo0aU4/preview", // coloque o PDF correspondente em public/meu-portifolio/books/
     },
     {
       id: 2,
-      title: "Tower Mosaico - Planalto",
-      subtitle: "Apartamento de 2 quartos.",
-      price: "R$ 297.400,00",
-      area: "46,60 m²",
-      lot: "11.129,49 m²",
-      img: "/meu-portifolio/img/Destaque-2.jpeg",
-      book: "https://drive.google.com/file/d/1Ttns9TI9IxL9EHWFZJuxQOu4cAJrdFKE/preview",
+      title: "Sensia Ponta Negra - Ponta Negra",
+      subtitle: "Apartamentos de 1 e 2 quartos.",
+      price: "R$ 465.000,00",
+      area: "46,86 e 62,91 m²",
+      lot: "12.845,26 m²",
+      img: "/meu-portifolio/img/sensia_pontanegra.jpg",
+      book: "https://drive.google.com/file/d/16HNMNAAFgz8rG3Lth6Z_yxB48U8uSYWu/preview",
     },
     {
       id: 3,
-      title: "Realize Mosaico - Planalto",
-      subtitle: "Apartamentos de 2 e 3 quartos.",
-      price: "R$ 219.600,00",
-      area: "40,60 e 48,43 m²",
-      lot: "22.356,31 m²",
-      img: "/meu-portifolio/img/Destaque-3.jpeg",
-      book: "https://drive.google.com/file/d/17G-6gBItGXpmOYuMiKBPMYMM_rkVTH8U/preview",
+      title: "Vista do Parque - Parque 10",
+      subtitle: "Apartamentos de 2 quartos/Suíte.",
+      price: "R$ 330.000,00",
+      area: "44,82 e 49,05 m²",
+      lot: "24.346,45 m²",
+      img: "/meu-portifolio/img/vista_parque.jpg",
+      book: "https://drive.google.com/file/d/1OKwfUichc3eQ8VDZbm4R6z_48EfoYmfa/preview",
+    },
+
+    {
+      id: 4,
+      title: "Resid. Tokyo - Novo Aleixo",
+      subtitle: "Apartamentos de 2 quartos/Suíte.",
+      price: "R$ 347.000,00",
+      area: "44,82 m², 49,05 e 51,555 m²",
+      lot: "16.308,25 m²",
+      img: "/meu-portifolio/img/resid_tokyo.jpg",
+      book: "https://drive.google.com/file/d/1UC2kNqZk2zYvtFcv3WKpUQJa2USpSp0o/preview", // coloque o PDF correspondente em public/meu-portifolio/books/
+    },
+    {
+      id: 5,
+      title: "Resid. Nagoya - Novo Aleixo",
+      subtitle: "Apartamento de 2 quartos/Suíte.",
+      price: "R$ 307.700,00",
+      area: "44,82 e 49,05 m²",
+      lot: "19.200,55 m²",
+      img: "/meu-portifolio/img/nagoya.jpg",
+      book: "https://drive.google.com/file/d/13BiU-fhENqJAPcpcmBHdqbPpytk61UQg/preview",
+    },
+    {
+      id: 6,
+      title: "Resid. Matsu - Novo Aleixo",
+      subtitle: "Apartamentos de 2 quartos.",
+      price: "R$ 215.100,00",
+      area: "38,40 e 42,40 m²",
+      lot: "32.203,93 m²",
+      img: "/meu-portifolio/img/matsujpg.jpg",
+      book: "https://drive.google.com/file/d/13BiU-fhENqJAPcpcmBHdqbPpytk61UQg/preview",
     },
   ];
 

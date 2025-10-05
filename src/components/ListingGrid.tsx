@@ -1,4 +1,3 @@
-import React from "react";
 import { Grid, Card, CardMedia, CardContent, Typography, Box, Button } from "@mui/material";
 
 export type Listing = {
