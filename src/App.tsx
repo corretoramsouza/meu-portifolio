@@ -22,6 +22,8 @@ import ServicesCarousel from "./components/ServicesCarousel";
 // @ts-ignore
 import Grid from "@mui/material/Grid";
 import AutoPlayVideo from "./components/AutoPlayVideo";
+import BookDialog from "./components/BookDialog";
+import { useState } from "react";
 
 //import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -63,42 +65,64 @@ export default function App() {
   const listings = [
     {
       id: 1,
-      title: "Apartamento 3 quartos - Ponta Negra",
-      price: "R$ 480.000",
-      area: "71 m²",
-      lot: "9x25",
+      title: "Horizonte - Ponta Negra",
+      subtitle: "Apartamentos de 2 e 3 quartos.",
+      price: "R$ 488.169,00",
+      area: "63,75 e 77,34 m²",
+      lot: "17.883,37 m²",
       img: "/meu-portifolio/img/Destaque-1.jpeg",
+      book: "https://drive.google.com/file/d/1Qiy7be8wVwfFlCu5IWh9XUYbUvnMoT_7/preview", // coloque o PDF correspondente em public/meu-portifolio/books/
     },
     {
       id: 2,
-      title: "Casa térrea - Tarumã",
-      price: "R$ 650.000",
-      area: "120 m²",
-      lot: "10x30",
+      title: "Tower Mosaico - Planalto",
+      subtitle: "Apartamento de 2 quartos.",
+      price: "R$ 297.400,00",
+      area: "46,60 m²",
+      lot: "11.129,49 m²",
       img: "/meu-portifolio/img/Destaque-2.jpeg",
+      book: "https://drive.google.com/file/d/1Ttns9TI9IxL9EHWFZJuxQOu4cAJrdFKE/preview",
     },
     {
       id: 3,
-      title: "Studio moderno - Centro",
-      price: "R$ 320.000",
-      area: "38 m²",
-      lot: "—",
+      title: "Realize Mosaico - Planalto",
+      subtitle: "Apartamentos de 2 e 3 quartos.",
+      price: "R$ 219.600,00",
+      area: "40,60 e 48,43 m²",
+      lot: "22.356,31 m²",
       img: "/meu-portifolio/img/Destaque-3.jpeg",
+      book: "https://drive.google.com/file/d/1sHE2Xx2gYkCqFxsXE29ADhl_uIr5tDtO/preview",
     },
   ];
 
   const testimonials = [
     {
       id: 1,
-      name: "Carlos M.",
+      name: "Yara S.",
       text: "Atendimento exemplar e aprovação rápida do financiamento pela Caixa.",
     },
     {
       id: 2,
-      name: "Ana R.",
+      name: "Mariana R.",
       text: "Ajudou a encontrar o imóvel ideal e acompanhou todo o processo.",
     },
   ];
+
+  const [bookOpen, setBookOpen] = useState(false);
+  const [bookSrc, setBookSrc] = useState<string | null>(null);
+  const [bookTitle, setBookTitle] = useState<string | undefined>(undefined);
+
+  const handleOpenBook = (src?: string, title?: string) => {
+    if (!src) return;
+    setBookSrc(src);
+    setBookTitle(title);
+    setBookOpen(true);
+  };
+  const handleCloseBook = () => {
+    setBookOpen(false);
+    setBookSrc(null);
+    setBookTitle(undefined);
+  };
 
   return (
     <Box sx={{ bgcolor: "#d8bed5ff", width: "100vw", minHeight: "100vh", alignItems: "center", justifyContent: "center", justifyItems: "center" }}>
@@ -190,10 +214,9 @@ export default function App() {
           <Typography variant="h5" color="text.secondary" sx={{ mt: 2 }}>
             Aqui você encontra lazer completo, segurança e tranquilidade para você e sua família !
           </Typography>
-
           <AutoPlayVideo src="/meu-portifolio/media/destaque-video-2.mp4" poster="/meu-portifolio/img/servico-2.jpeg" />
-
         </Box>
+        
         <Grid container spacing={3} sx={{ mt: 2, justifyContent: "center" }}>
           {listings.map((l) => (
             <Grid key={l.id} maxWidth={350} width='100%'>
@@ -225,13 +248,19 @@ export default function App() {
                 />
 
                 <CardContent sx={{ color: 'white', bgcolor: 'rgba(78, 15, 75, 0.8)', alignContent: 'end', height: 200 }}>
-                  <Typography variant="h6">{l.title}</Typography>
-                  <Typography color="white" fontWeight={700}>{l.price}</Typography>
+                  <Typography variant="h5">{l.title}</Typography>
+                  <Typography variant="body1"><strong>{l.subtitle}</strong></Typography>
+                  <Typography color="#e895f7ff" fontWeight={700}>{l.price}</Typography>
                   <Typography variant="body2" color="white">
                     Área: {l.area} • Terreno: {l.lot}
                   </Typography>
                   <Box mt={2} display="flex" gap={1}>
-                    <Button variant="outlined" color="inherit" size="small" href={`mailto:corretora.msouza@gmail.com?subject=Interesse%20no%20${encodeURIComponent(l.title)}`}>
+                    <Button
+                      variant="outlined"
+                      color="inherit"
+                      size="small"
+                      onClick={() => handleOpenBook(l.book, l.title)}
+                    >
                       Mais informações
                     </Button>
                     <Button variant="outlined" color="inherit" size="small" href="#contato">
@@ -353,6 +382,8 @@ export default function App() {
       < Box sx={{ bgcolor: "#111", width: "100%", color: "#aaa", py: 4, textAlign: "center" }}>
         <Typography variant="body2">© {new Date().getFullYear()} Mônica Souza — Corretora. Todos os direitos reservados.</Typography>
       </Box >
+      {/* Book dialog (visualização dos PDFs / books) */}
+      <BookDialog open={bookOpen} onClose={handleCloseBook} src={bookSrc ?? undefined} title={bookTitle} />
     </Box >
   );
 }
