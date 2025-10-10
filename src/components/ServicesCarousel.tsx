@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Card,
@@ -6,23 +6,24 @@ import {
   Typography,
   Stack,
   IconButton,
-  useTheme,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-type Listing = {
+export type Listing = {
   id: number;
   title: string;
   description: string;
   img: string;
+  focal?: string; // opcional: "center top", "center", etc.
 };
 
 export default function ServicesCarousel({ listings }: { listings: Listing[] }) {
   const theme = useTheme();
   const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
-  const height = isLgUp ? 420 : 260;
+  const height = isLgUp ? 600 : 360;
 
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -31,7 +32,6 @@ export default function ServicesCarousel({ listings }: { listings: Listing[] }) 
   const duration = 4000;
 
   useEffect(() => {
-    // autoplay timer
     if (paused) {
       if (intervalRef.current) {
         window.clearInterval(intervalRef.current);
@@ -51,14 +51,11 @@ export default function ServicesCarousel({ listings }: { listings: Listing[] }) 
   }, [listings.length, paused]);
 
   const go = (index: number) => {
-    setActive(() => {
-      const next = (index + listings.length) % listings.length;
-      return next;
-    });
-    // restart timer briefly to avoid instant change
+    const next = (index + listings.length) % listings.length;
+    setActive(next);
+    // reinicia timer
     setPaused(true);
-    window.clearInterval(intervalRef.current ?? undefined);
-    // resume after one duration
+    if (intervalRef.current) window.clearInterval(intervalRef.current);
     window.setTimeout(() => setPaused(false), duration);
   };
 
@@ -81,7 +78,6 @@ export default function ServicesCarousel({ listings }: { listings: Listing[] }) 
       onMouseLeave={() => setPaused(false)}
     >
       <Box sx={{ width: "100%", maxWidth: 900, position: "relative" }}>
-        {/* images (stacked) */}
         <Box
           sx={{
             position: "relative",
@@ -89,10 +85,16 @@ export default function ServicesCarousel({ listings }: { listings: Listing[] }) 
             height: typeof height === "number" ? `${height}px` : height,
             overflow: "hidden",
             borderRadius: 1,
+            bgcolor: "grey.100",
           }}
         >
           {listings.map((l, i) => {
             const isActive = i === active;
+            // se listing fornecer focal use-o, senão detectar título "Venda & Compra"
+            const focal =
+              l.focal ??
+              (l.title && l.title.toLowerCase().includes("venda") ? "center top" : "center");
+
             return (
               <img
                 key={l.id}
@@ -103,8 +105,9 @@ export default function ServicesCarousel({ listings }: { listings: Listing[] }) 
                   top: 0,
                   left: 0,
                   width: "100%",
-                  height: typeof height === "number" ? `${height}px` : "100%",
-                  objectFit: "cover",
+                  height: "100%",
+                  objectFit: "cover", // mantém proporção e preenche altura/lar
+                  objectPosition: focal, // controla foco (fachada)
                   transition: `opacity ${transitionMs}ms ease, transform ${transitionMs}ms ease`,
                   opacity: isActive ? 1 : 0,
                   transform: isActive ? "translateX(0) scale(1)" : "translateX(20px) scale(0.98)",
@@ -116,7 +119,6 @@ export default function ServicesCarousel({ listings }: { listings: Listing[] }) 
             );
           })}
 
-          {/* prev / next buttons */}
           <IconButton
             onClick={handlePrev}
             size="large"
@@ -154,8 +156,7 @@ export default function ServicesCarousel({ listings }: { listings: Listing[] }) 
           </IconButton>
         </Box>
 
-        {/* info card below image */}
-        <Card sx={{ overflow: "visible" }}>
+        <Card sx={{ overflow: "visible", mt: 1 }}>
           <CardContent sx={{ bgcolor: "rgba(78, 15, 75, 0.8)" }}>
             <Typography variant="h6" color="white" gutterBottom>
               {listings[active].title}
@@ -167,7 +168,6 @@ export default function ServicesCarousel({ listings }: { listings: Listing[] }) 
         </Card>
       </Box>
 
-      {/* dots */}
       <Stack direction="row" spacing={1}>
         {listings.map((l, i) => (
           <Box
@@ -177,7 +177,7 @@ export default function ServicesCarousel({ listings }: { listings: Listing[] }) 
               width: 12,
               height: 12,
               borderRadius: "50%",
-              bgcolor: i === active ? "#897FA2" : "#b1a7caff",
+              bgcolor: i === active ? "#897FA2" : "grey.400",
               cursor: "pointer",
             }}
           />

@@ -14,7 +14,7 @@ import {
   Card,
   TextField,
   Paper,
-  Avatar, Stack
+  Avatar, Stack, Link
 } from "@mui/material";
 import ServicesCarousel from "./components/ServicesCarousel";
 // @ts-ignore
@@ -23,157 +23,27 @@ import AutoPlayVideo from "./components/AutoPlayVideo";
 import BookDialog from "./components/BookDialog";
 import { useState } from "react";
 import ListingGrid from "./components/ListingGrid";
+import { imobiliariaParceira } from "./fonteDeDados";
 
 //import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import { useMediaQuery, useTheme } from "@mui/system";
+import { listServices, listings, listProducts, listParceiros, testimonials } from "./fonteDeDados";
 
 export default function App() {
   const theme = useTheme();
   const isLgUp = useMediaQuery(theme.breakpoints.up('lg'));
   const opacityTarget = isLgUp ? 0.0 : 0.5;
-
-  const listServices = [
-    {
-      id: 1,
-      title: "Consultoria Imobiliária",
-      description: "Seleção personalizada de imóveis conforme suas necessidades.",
-      img: '/meu-portifolio/img/servico-1.jpeg'
-    },
-    {
-      id: 2,
-      title: "Venda & Compra",
-      description: "Ajudo compradores e vendedores com as melhores condições.",
-      img: '/meu-portifolio/img/servico-2.jpeg'
-    },
-    {
-      id: 3,
-      title: "Imóvel na planta",
-      description: "Especialista em lançamentos — da planta à entrega.",
-      img: '/meu-portifolio/img/implemetacao_planta.jpg'
-    },
-    {
-      id: 4,
-      title: "Financiamento",
-      description: "Auxílio completo com bancos e documentação..",
-      img: '/meu-portifolio/img/servico-4.jpeg'
-    },
-  ]
-
-  const listings = [
-    {
-      id: 1,
-      title: "Horizonte - Ponta Negra",
-      subtitle: "Apartamentos de 2 e 3 quartos.",
-      price: "R$ 488.169,00",
-      area: "63,75 e 77,34 m²",
-      lot: "17.883,37 m²",
-      img: "/meu-portifolio/img/Destaque-1.jpeg",
-      book: "https://drive.google.com/file/d/1Qiy7be8wVwfFlCu5IWh9XUYbUvnMoT_7/preview", // coloque o PDF correspondente em public/meu-portifolio/books/
-    },
-    {
-      id: 2,
-      title: "Tower Mosaico - Planalto",
-      subtitle: "Apartamento de 2 quartos.",
-      price: "R$ 297.400,00",
-      area: "46,60 m²",
-      lot: "11.129,49 m²",
-      img: "/meu-portifolio/img/Destaque-2.jpeg",
-      book: "https://drive.google.com/file/d/1Ttns9TI9IxL9EHWFZJuxQOu4cAJrdFKE/preview",
-    },
-    {
-      id: 3,
-      title: "Realize Mosaico - Planalto",
-      subtitle: "Apartamentos de 2 e 3 quartos.",
-      price: "R$ 219.600,00",
-      area: "40,60 e 48,43 m²",
-      lot: "22.356,31 m²",
-      img: "/meu-portifolio/img/Destaque-3.jpeg",
-      book: "https://drive.google.com/file/d/17G-6gBItGXpmOYuMiKBPMYMM_rkVTH8U/preview",
-    },
-  ];
-
-  const listProducts = [
-    {
-      id: 1,
-      title: "Sensia La Vie - Chapada",
-      subtitle: "Apartamentos de 1 e 2 quartos.",
-      price: "R$ 386.200,00",
-      area: "41,91 e 59,43 m²",
-      lot: "13.711,39 m²",
-      img: "/meu-portifolio/img/sensiaprodutos.jpg",
-      book: "https://drive.google.com/file/d/1GJW9E2SQtJaaMT5sv7EZ6hgQK7eo0aU4/preview", // coloque o PDF correspondente em public/meu-portifolio/books/
-    },
-    {
-      id: 2,
-      title: "Sensia Ponta Negra - Ponta Negra",
-      subtitle: "Apartamentos de 1 e 2 quartos.",
-      price: "R$ 465.000,00",
-      area: "46,86 e 62,91 m²",
-      lot: "12.845,26 m²",
-      img: "/meu-portifolio/img/sensia_pontanegra.jpg",
-      book: "https://drive.google.com/file/d/16HNMNAAFgz8rG3Lth6Z_yxB48U8uSYWu/preview",
-    },
-    {
-      id: 3,
-      title: "Vista do Parque - Parque 10",
-      subtitle: "Apartamentos de 2 quartos/Suíte.",
-      price: "R$ 330.000,00",
-      area: "44,82 e 49,05 m²",
-      lot: "24.346,45 m²",
-      img: "/meu-portifolio/img/vista_parque.jpg",
-      book: "https://drive.google.com/file/d/1OKwfUichc3eQ8VDZbm4R6z_48EfoYmfa/preview",
-    },
-
-    {
-      id: 4,
-      title: "Resid. Tokyo - Novo Aleixo",
-      subtitle: "Apartamentos de 2 quartos/Suíte.",
-      price: "R$ 347.000,00",
-      area: "44,82 m², 49,05 e 51,555 m²",
-      lot: "16.308,25 m²",
-      img: "/meu-portifolio/img/resid_tokyo.jpg",
-      book: "https://drive.google.com/file/d/1UC2kNqZk2zYvtFcv3WKpUQJa2USpSp0o/preview", // coloque o PDF correspondente em public/meu-portifolio/books/
-    },
-    {
-      id: 5,
-      title: "Resid. Nagoya - Novo Aleixo",
-      subtitle: "Apartamento de 2 quartos/Suíte.",
-      price: "R$ 307.700,00",
-      area: "44,82 e 49,05 m²",
-      lot: "19.200,55 m²",
-      img: "/meu-portifolio/img/nagoya.jpg",
-      book: "https://drive.google.com/file/d/13BiU-fhENqJAPcpcmBHdqbPpytk61UQg/preview",
-    },
-    {
-      id: 6,
-      title: "Resid. Matsu - Novo Aleixo",
-      subtitle: "Apartamentos de 2 quartos.",
-      price: "R$ 215.100,00",
-      area: "38,40 e 42,40 m²",
-      lot: "32.203,93 m²",
-      img: "/meu-portifolio/img/matsujpg.jpg",
-      book: "https://drive.google.com/file/d/13BiU-fhENqJAPcpcmBHdqbPpytk61UQg/preview",
-    },
-  ];
-
-  const testimonials = [
-    {
-      id: 1,
-      name: "Yara S.",
-      text: "Atendimento exemplar e aprovação rápida do financiamento pela Caixa.",
-    },
-    {
-      id: 2,
-      name: "Mariana R.",
-      text: "Ajudou a encontrar o imóvel ideal e acompanhou todo o processo.",
-    },
-  ];
-
   const [bookOpen, setBookOpen] = useState(false);
   const [bookSrc, setBookSrc] = useState<string | null>(null);
   const [bookTitle, setBookTitle] = useState<string | undefined>(undefined);
+
+  // Contact + Testimonials local state (adicionado)
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
+  const [testimonialsLocal, setTestimonialsLocal] = useState(testimonials);
 
   const handleOpenBook = (src?: string, title?: string) => {
     if (!src) return;
@@ -279,7 +149,7 @@ export default function App() {
           </Typography>
           <AutoPlayVideo src="/meu-portifolio/media/destaque-video-2.mp4" poster="/meu-portifolio/img/servico-2.jpeg" />
         </Box>
-        
+
         <ListingGrid listings={listings} onOpenBook={handleOpenBook} />
 
         <Box textAlign="center" sx={{ width: '100%', mt: 4 }}>
@@ -296,8 +166,8 @@ export default function App() {
 
       </Container>
 
-      
-       {/* Produtos */}
+
+      {/* Produtos */}
       <Container id="produtos" sx={{ maxWidth: 1200, ml: 5, mr: 5, pt: 8, pb: 4 }}>
         <Typography variant="h4" gutterBottom>
           Produtos
@@ -310,103 +180,124 @@ export default function App() {
         <ListingGrid listings={listProducts} onOpenBook={handleOpenBook} />
       </Container >
 
-       {/* SERVIÇOS */}
-      <Container id="servicos" sx={{ maxWidth: 1200, ml: 5, mr: 5, pt: 8, pb: 4 }}>
+      {/* CONSTRUTORAS PARCEIRAS */}
+      <Container id="construtoras" sx={{ maxWidth: 1200, ml: 5, mr: 5, pt: 6, pb: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Serviços
+          Construtoras Parceiras
         </Typography>
         <Typography variant="body1" color="text.secondary" gutterBottom>
-          Consultoria completa: seleção de imóveis, visita, negociação e apoio no financiamento.
+          Conheça as construtoras com as quais trabalho.
         </Typography>
+        <ListingGrid
+          listings={listParceiros}
+          onOpenBook={handleOpenBook}
+          cardHeight={250}
+          cardContentHeight={150}
+          cardBgColor="#504078"
+        />
+      </Container>
 
-        {/* Carousel component */}
-        <ServicesCarousel listings={listServices} />
-      </Container >
+      {/* Imobiliária parceira — MANTER APENAS ESTE BLOCO (removida duplicata do final do arquivo) */}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 2,
+          p: 2,
+          bgcolor: "rgba(78,15,75,0.06)",
+          borderRadius: 1,
+          mt: 3,
+          flexDirection: { xs: "column", md: "row" },
+          textAlign: { xs: "center", md: "left" },
+        }}
+      >
+        <Avatar
+          src={imobiliariaParceira.logo}
+          alt={imobiliariaParceira.name}
+          sx={{ width: 80, height: 80 }}
+        />
+        <Box>
+          <Typography variant="h6">{imobiliariaParceira.name}</Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 800 }}>
+            {imobiliariaParceira.description}
+          </Typography>
 
+          <Box sx={{ mt: 1, display: "flex", gap: 2, justifyContent: { xs: "center", md: "flex-start" } }}>
+            <Link href={imobiliariaParceira.phone} color="inherit" underline="none">Contato</Link>
+            <Link href={imobiliariaParceira.email} color="inherit" underline="none">E-mail</Link>
+            {imobiliariaParceira.website && (
+              <Link href={imobiliariaParceira.website} target="_blank" rel="noopener" color="inherit">Site</Link>
+            )}
+          </Box>
+        </Box>
+      </Box>
 
       {/* DEPOIMENTOS */}
-
-      <Container id="depoimentos" sx={{ maxWidth: 1200, pl: 5, pr: 5, pt: 8, pb: 4 }}>
+      <Container id="depoimentos" sx={{ maxWidth: 1200, ml: 5, mr: 5, pt: 6, pb: 4 }}>
         <Typography variant="h4" gutterBottom>
           Depoimentos
         </Typography>
         <Typography variant="body1" color="text.secondary" gutterBottom>
-          O que dizem os nossos clientes.
+          O que meus clientes dizem.
         </Typography>
-        <Stack width={{ xs: "100%" }} textAlign="left" sx={{ mt: 2 }}>
-          {testimonials.map((t) => (
-            <Box key={t.id} display="flex" sx={{ justifyItems: 'center', justifyContent: 'center' }} alignItems="center" gap={2} mb={3}>
-              <Paper elevation={2} sx={{ p: 3, Width: '100%' }}>
-                <Typography variant="body1">“{t.text}”</Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                  — {t.name}
-                </Typography>
-              </Paper>
-            </Box>
+
+        <Box sx={{ display: "grid", gap: 2, gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr" }, mt: 2 }}>
+          {testimonialsLocal.map((t) => (
+            <Paper key={t.id} elevation={1} sx={{ p: 2 }}>
+              <Typography variant="subtitle1" fontWeight={700}>
+                {t.name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {t.text}
+              </Typography>
+            </Paper>
           ))}
-        </Stack>
+        </Box>
+
+        {/* formulário rápido de envio de depoimento */}
+        <Box component="form" onSubmit={(e: React.FormEvent) => {
+            e.preventDefault();
+            if (!contactName || !contactMessage) return;
+            setTestimonialsLocal((s) => [...s, { id: Date.now(), name: contactName, text: contactMessage }]);
+            setContactName(""); setContactMessage(""); setContactEmail("");
+          }} sx={{ mt: 3, display: "flex", gap: 2, flexDirection: { xs: "column", md: "row" } }}>
+          <TextField label="Seu nome" value={contactName} onChange={(e) => setContactName(e.target.value)} fullWidth />
+          <TextField label="Mensagem" value={contactMessage} onChange={(e) => setContactMessage(e.target.value)} fullWidth />
+          <Button type="submit" variant="contained" color="secondary">Enviar depoimento</Button>
+        </Box>
       </Container>
 
-
       {/* CONTATO */}
-      < Container id="contato" sx={{ maxWidth: 1200, pl: 5, pr: 5, pt: 8, pb: 4 }}>
-        <Typography variant="h4" gutterBottom>
-          Contato
-        </Typography>
+      <Container id="contato" sx={{ maxWidth: 1200, ml: 5, mr: 5, pt: 6, pb: 6 }}>
+        <Typography variant="h4" gutterBottom>Contato</Typography>
         <Typography variant="body1" color="text.secondary" gutterBottom>
-          Não se acanhe, mesmo que seja para tirar dúvidas, entre em contato!
+          Entre em contato para agendar visitas ou tirar dúvidas.
         </Typography>
-        <Grid container spacing={4}>
-          <Grid>
-            <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
-              <Typography variant="body2" color="text.secondary">
-                Telefone / WhatsApp
-              </Typography>
-              <Typography variant="h6">(92) 98609-3554</Typography>
-            </Paper>
-            <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
-              <Typography variant="body2" color="text.secondary">
-                E-mail
-              </Typography>
-              <Typography variant="h6">corretora.msouza@gmail.com</Typography>
-            </Paper>
-            <Paper elevation={2} sx={{ p: 3 }}>
-              <Typography variant="body2" color="text.secondary">
-                CRECI
-              </Typography>
-              <Typography variant="h6">AM 7646</Typography>
-            </Paper>
-          </Grid>
 
-          <Grid>
-            <Paper elevation={2} sx={{ p: 4 }}>
-              <Typography variant="h6" gutterBottom>
-                Envie uma mensagem
-              </Typography>
-              <Box component="form" onSubmit={(e) => e.preventDefault()}>
-                <TextField label="Seu nome" fullWidth margin="normal" />
-                <TextField label="Telefone ou WhatsApp" fullWidth margin="normal" />
-                <TextField label="Mensagem" fullWidth multiline rows={4} margin="normal" />
-                <Box display="flex" gap={2} mt={2}>
-                  <Button type="submit" variant="contained">
-                    Enviar
-                  </Button>
-                  <Button variant="outlined" href="mailto:corretora.msouza@gmail.com">
-                    Enviar por e-mail
-                  </Button>
-                </Box>
-              </Box>
-            </Paper>
-          </Grid>
-        </Grid>
-      </Container >
+        <Box component="form" onSubmit={(e: React.FormEvent) => {
+            e.preventDefault();
+            // abre cliente de email como fallback; você pode trocar para API
+            const subject = encodeURIComponent("Contato pelo site - " + (contactName || "Interessado"));
+            const body = encodeURIComponent(`${contactMessage}\n\nContato: ${contactEmail}`);
+            window.location.href = `mailto:corretora.msouza@gmail.com?subject=${subject}&body=${body}`;
+            setContactName(""); setContactEmail(""); setContactMessage("");
+          }} sx={{ mt: 2, display: "grid", gap: 2, gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" } }}>
+          <TextField label="Nome" value={contactName} onChange={(e) => setContactName(e.target.value)} required fullWidth />
+          <TextField label="Email ou telefone" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} required fullWidth />
+          <TextField label="Mensagem" value={contactMessage} onChange={(e) => setContactMessage(e.target.value)} multiline rows={4} sx={{ gridColumn: "1 / -1" }} />
+          <Box sx={{ gridColumn: "1 / -1", display: "flex", justifyContent: "flex-end" }}>
+            <Button type="submit" variant="contained" color="secondary">Enviar</Button>
+          </Box>
+        </Box>
+      </Container>
 
-      {/* FOOTER */}
-      < Box sx={{ bgcolor: "#111", width: "100%", color: "#aaa", py: 4, textAlign: "center" }}>
-        <Typography variant="body2">© {new Date().getFullYear()} Mônica Souza — Corretora. Todos os direitos reservados.</Typography>
-      </Box >
       {/* Book dialog (visualização dos PDFs / books) */}
       <BookDialog open={bookOpen} onClose={handleCloseBook} src={bookSrc ?? undefined} title={bookTitle} />
-    </Box >
+
+      {/* FOOTER */}
+      <Box sx={{ bgcolor: "#330520ff", width: "100%", color: "#aaa", py: 4, textAlign: "center", mt: 4 }}>
+        <Typography variant="body2">© {new Date().getFullYear()} Mônica de Souza — Corretora CRECI-AM 7646 PF. Todos os direitos reservados.</Typography>
+      </Box>
+    </Box>
   );
 }

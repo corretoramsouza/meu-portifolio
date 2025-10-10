@@ -14,9 +14,15 @@ export type Listing = {
 export default function ListingGrid({
   listings,
   onOpenBook,
+  cardHeight = 350,
+  cardContentHeight = 200,
+  cardBgColor = "rgba(78, 15, 75, 0.8)",
 }: {
   listings: Listing[];
   onOpenBook?: (src?: string, title?: string) => void;
+  cardHeight?: number;
+  cardContentHeight?: number;
+  cardBgColor?: string;
 }) {
   return (
     <Grid container spacing={3} sx={{ mt: 2, justifyContent: "center" }}>
@@ -36,7 +42,7 @@ export default function ListingGrid({
           >
             <CardMedia
               component="img"
-              height={350}
+              height={cardHeight}
               image={l.img}
               alt={l.title}
               className="card-image"
@@ -48,7 +54,7 @@ export default function ListingGrid({
               }}
             />
 
-            <CardContent sx={{ color: "white", bgcolor: "rgba(78, 15, 75, 0.8)", alignContent: "end", height: 200 }}>
+            <CardContent sx={{ color: "white", bgcolor: cardBgColor, alignContent: "end", height: cardContentHeight }}>
               <Typography variant="h5">{l.title}</Typography>
               {l.subtitle && <Typography variant="body1"><strong>{l.subtitle}</strong></Typography>}
               {l.price && <Typography color="#e895f7ff" fontWeight={700}>{l.price}</Typography>}
