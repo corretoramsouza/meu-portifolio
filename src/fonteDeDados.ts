@@ -71,7 +71,7 @@ export const listProducts = [
   },
   {
     id: 2,
-    title: "Sensia Ponta Negra - Ponta Negra",
+    title: "Sensia- Ponta Negra",
     subtitle: "Apartamentos de 1 e 2 quartos.",
     price: "R$ 465.000,00",
     area: "46,86 e 62,91 m²",
@@ -124,63 +124,63 @@ export const listProducts = [
 export const listParceiros = [
   {
     id: 1,
-    title: "Construtora - MRV",
+    title: "MRV",
     subtitle: "Apartamentos de 1 e 2 quartos.",
     img: "/meu-portifolio/img/mrv1.jpg",
     book: "https://drive.google.com/file/d/1GJW9E2SQtJaaMT5sv7EZ6hgQK7eo0aU4/preview",
   },
   {
     id: 2,
-    title: "Incorporadora - Sensia",
+    title: "Sensia",
     subtitle: "Apartamentos de 1 e 2 quartos.",
     img: "/meu-portifolio/img/sensia.png",
     book: "https://drive.google.com/file/d/16HNMNAAFgz8rG3Lth6Z_yxB48U8uSYWu/preview",
   },
   {
     id: 3,
-    title: "Construtora - Morar Mais",
+    title: "Morar Mais",
     subtitle: "Apartamentos de 2 quartos/Suíte.",
     img: "/meu-portifolio/img/morarmaisok.png",
     book: "https://drive.google.com/file/d/1OKwfUichc3eQ8VDZbm4R6z_48EfoYmfa/preview",
   },
   {
     id: 4,
-    title: "Construtora - Capital",
+    title: "Capital",
     subtitle: "Apartamentos de 2 quartos/Suíte.",
     img: "/meu-portifolio/img/capital.png",
     book: "https://drive.google.com/file/d/1UC2kNqZk2zYvtFcv3WKpUQJa2USpSp0o/preview",
   },
   {
     id: 5,
-    title: "Construtora - Olá",
+    title: "Olá",
     subtitle: "Apartamento de 2 quartos/Suíte.",
     img: "/meu-portifolio/img/olacasa.png",
     book: "https://drive.google.com/file/d/13BiU-fhENqJAPcpcmBHdqbPpytk61UQg/preview",
   },
   {
     id: 6,
-    title: "Construtora - Smart Empreendimentos",
+    title: "Smart Empreendimentos",
     subtitle: "Apartamentos de 2 quartos.",
     img: "/meu-portifolio/img/smartok.png",
     book: "https://drive.google.com/file/d/13BiU-fhENqJAPcpcmBHdqbPpytk61UQg/preview",
   },
   {
     id: 7,
-    title: "Construtora - Civil Corp",
+    title: "Civil Corp",
     subtitle: "Apartamentos de 2 quartos/Suíte.",
     img: "/meu-portifolio/img/civilcorp.png",
     book: "https://drive.google.com/file/d/1UC2kNqZk2zYvtFcv3WKpUQJa2USpSp0o/preview",
   },
   {
     id: 8,
-    title: "Construtora - Engeco",
+    title: "Engeco",
     subtitle: "Apartamento de 2 quartos/Suíte.",
     img: "/meu-portifolio/img/logo_engeco.png",
     book: "https://drive.google.com/file/d/13BiU-fhENqJAPcpcmBHdqbPpytk61UQg/preview",
   },
   {
     id: 9,
-    title: "Construtora - Unipar",
+    title: "Unipar",
     subtitle: "Apartamentos de 2 quartos.",
     img: "/meu-portifolio/img/unipar.jpg",
     book: "https://drive.google.com/file/d/13BiU-fhENqJAPcpcmBHdqbPpytk61UQg/preview",
@@ -189,16 +189,24 @@ export const listParceiros = [
 
 export const imobiliariaParceira = {
   id: 1,
-  name: "Imobiliária Home Negócios Imobiliários",
-  logo: "/meu-portifolio/img/home.png",
+  name: "Home Negócios Imobiliários",
+  logo: "/meu-portifolio/img/home1.png",
   description:
     "Atendimento personalizado em Manaus — intermediação, assessoria em financiamento e acompanhamento até a entrega.",
-  phone: "tel:+5592986093554",
-  email: "mailto:corretora.msouza@gmail.com",
+  phone: "tel:(92) 99153-8861",
+  email: "mailto:home.am.imob@gmail.com",
   website: "https://seu-site-ou-link",
 };
 
-export const testimonials = [
+
+export type Depoimento = {
+    id: number;
+    name: string;
+    text: string;
+}
+
+
+export const depoimentos: Depoimento[] = [
   {
     id: 1,
     name: "Yara S.",

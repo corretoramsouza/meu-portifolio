@@ -1,4 +1,5 @@
 import { Grid, Card, CardMedia, CardContent, Typography, Box, Button } from "@mui/material";
+import { textAlign } from "@mui/system";
 
 export type Listing = {
   id: number;
@@ -17,12 +18,14 @@ export default function ListingGrid({
   cardHeight = 350,
   cardContentHeight = 200,
   cardBgColor = "rgba(78, 15, 75, 0.8)",
+  textAlign = "left"
 }: {
   listings: Listing[];
   onOpenBook?: (src?: string, title?: string) => void;
   cardHeight?: number;
   cardContentHeight?: number;
   cardBgColor?: string;
+  textAlign?: "left" | "center" | "right";
 }) {
   return (
     <Grid container spacing={3} sx={{ mt: 2, justifyContent: "center" }}>
@@ -61,8 +64,9 @@ export default function ListingGrid({
               <Typography variant="body2" color="white">
                 {l.area ? `Área: ${l.area}` : ""}{l.area && l.lot ? " • " : ""}{l.lot ?? ""}
               </Typography>
-              <Box mt={2} display="flex" gap={1}>
-                <Button
+              <Box mt={2} display="flex" gap={1} sx={{ textAlign: textAlign, alignItems: textAlign, justifyContent: textAlign, justifyItems: textAlign }}>
+                {l.book && 
+                  <Button
                   variant="outlined"
                   color="inherit"
                   size="small"
@@ -70,6 +74,8 @@ export default function ListingGrid({
                 >
                   Mais informações
                 </Button>
+                }
+                
                 <Button variant="outlined" color="inherit" size="small" href="#contato">
                   Agendar visita
                 </Button>
