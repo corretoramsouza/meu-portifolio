@@ -1,5 +1,4 @@
 import { Grid, Card, CardMedia, CardContent, Typography, Box, Button } from "@mui/material";
-import { textAlign } from "@mui/system";
 
 export type Listing = {
   id: number;
